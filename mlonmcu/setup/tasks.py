@@ -794,7 +794,7 @@ def _validate_cmsisnn(context: MlonMcuContext, params=None):
     if not context.environment.has_feature("cmsisnn") or context.environment.has_feature("cmsisnnbyoc"):
         return False
     if "target_arch" in params:
-        if not ((params["target_arch"] == "riscv" and _validate_riscv_gcc()) or (params["target_arch"] == "arm" and _validate_corstone300()) or (params["target_arch"] == "x86")):
+        if not ((params["target_arch"] == "riscv" and _validate_riscv_gcc(context)) or (params["target_arch"] == "arm" and _validate_corstone300(context)) or (params["target_arch"] == "x86")):
             return False
         if "mvei" in params and "dsp" in params:
             if not (params["target_arch"] == "arm" or (not params["dsp"] and not params["mvei"])):
