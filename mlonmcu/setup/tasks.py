@@ -753,7 +753,15 @@ def build_spike(context: MlonMcuContext, params=None, rebuild=False, verbose=Fal
 
 
 def _validate_cmsisnn(context: MlonMcuContext, params=None):
-    return context.environment.has_feature("cmsisnn") or context.environment.has_feature("cmsisnnbyoc")
+    return (
+        (context.environment.has_feature("cmsisnn") or context.environment.has_feature("cmsisnnbyoc"))
+        and (
+            (params["target_arch"] == "riscv" and _validate_riscv_gcc())
+            or (params["target_arch"] == "arm" and _validate_corstone300())
+            or (params["target_arch"] == "x86")
+        )
+        and (params["target_arch"] == "arm" or (not params["dsp"] and not params["mvei"]))
+    )
 
 
 def _validate_cmsis(context: MlonMcuContext, params=None):
