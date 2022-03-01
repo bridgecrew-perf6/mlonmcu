@@ -705,6 +705,8 @@ def build_spike_pk(context: MlonMcuContext, params=None, rebuild=False, verbose=
     """Build Spike proxy kernel."""
     if not params:
         params = {}
+    if "spike.pk" in user_vars:  # TODO: also check command line flags?
+        return False
     # flags = utils.makeFlags((params["vext"], "vext"))
     spikepkName = utils.makeDirName("spikepk")
     spikepkSrcDir = context.cache["spikepk.src_dir"]
@@ -712,8 +714,6 @@ def build_spike_pk(context: MlonMcuContext, params=None, rebuild=False, verbose=
     spikepkInstallDir = context.environment.paths["deps"].path / "install" / spikepkName
     spikepkBin = spikepkInstallDir / "pk"
     user_vars = context.environment.vars
-    if "spike.pk" in user_vars:  # TODO: also check command line flags?
-        return False
     if rebuild or not (utils.is_populated(spikepkBuildDir) and spikepkBin.is_file()):
         # No need to build a vext and non-vext variant?
         utils.mkdirs(spikepkBuildDir)
