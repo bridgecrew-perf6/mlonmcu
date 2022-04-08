@@ -19,6 +19,7 @@
 """Definition of tasks used to dynamically install MLonMCU dependencies"""
 
 import os
+import sys
 from pathlib import Path
 
 from mlonmcu.setup.task import TaskFactory, TaskType
