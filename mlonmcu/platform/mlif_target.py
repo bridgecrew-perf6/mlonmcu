@@ -24,6 +24,7 @@ from mlonmcu.target.etiss_pulpino import EtissPulpinoTarget
 from mlonmcu.target.corstone300 import Corstone300Target
 from mlonmcu.target.spike import SpikeTarget
 from mlonmcu.target.ovpsim import OVPSimTarget
+from mlonmcu.target.qemu_sifive import QemuSifiveTarget
 from mlonmcu.logging import get_logger
 
 logger = get_logger()
@@ -48,6 +49,7 @@ register_mlif_target("etiss_pulpino", EtissPulpinoTarget)
 register_mlif_target("corstone300", Corstone300Target)
 register_mlif_target("spike", SpikeTarget)
 register_mlif_target("ovpsim", OVPSimTarget)
+register_mlif_target("qemu_sifive", QemuSifiveTarget)
 
 
 class MlifExitCode(IntEnum):
